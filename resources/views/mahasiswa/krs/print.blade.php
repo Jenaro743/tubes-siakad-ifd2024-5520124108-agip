@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cetak KRS</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><style>@media print{.no-print{display:none}}</style></head>
+<body class="p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 no-print"><a class="btn btn-outline-secondary" href="{{ route('mahasiswa.krs.index') }}">Kembali</a><button class="btn btn-primary" onclick="window.print()">Cetak / Simpan PDF</button></div>
+    <div class="text-center mb-4"><h1 class="h3">Kartu Rencana Studi</h1><p class="mb-0">Sistem Informasi Akademik</p></div>
+    <table class="table table-sm table-borderless w-auto"><tr><th>NPM</th><td>{{ $mahasiswa->npm }}</td></tr><tr><th>Nama</th><td>{{ $mahasiswa->nama_mahasiswa }}</td></tr><tr><th>Jurusan</th><td>{{ $mahasiswa->jurusan }}</td></tr><tr><th>Semester</th><td>{{ $mahasiswa->semester }}</td></tr></table>
+    <table class="table table-bordered"><thead><tr><th>No</th><th>Kode</th><th>Mata Kuliah</th><th>SKS</th><th>Dosen</th><th>Jadwal</th></tr></thead><tbody>@foreach($krs as $item)<tr><td>{{ $loop->iteration }}</td><td>{{ $item->jadwal->mataKuliah->kode_mk }}</td><td>{{ $item->jadwal->mataKuliah->nama_mk }}</td><td>{{ $item->jadwal->mataKuliah->sks }}</td><td>{{ $item->jadwal->dosen->nama_dosen }}</td><td>{{ $item->jadwal->hari }}, {{ substr($item->jadwal->jam_mulai,0,5) }} - {{ substr($item->jadwal->jam_selesai,0,5) }}</td></tr>@endforeach</tbody><tfoot><tr><th colspan="3">Total SKS</th><th colspan="3">{{ $totalSks }}</th></tr></tfoot></table>
+</body></html>

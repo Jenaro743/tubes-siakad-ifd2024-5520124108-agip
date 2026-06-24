@@ -1,0 +1,7 @@
+<x-app-layout>
+    <x-slot name="header"><h1 class="h3 mb-0">Data Jadwal</h1><div><a class="btn btn-outline-success" href="{{ route('admin.jadwal.export') }}">Export</a> <a class="btn btn-primary" href="{{ route('admin.jadwal.create') }}">Tambah</a></div></x-slot>
+    <x-partials.search><div class="col-md-2"><select class="form-select" name="hari"><option value="">Semua Hari</option>@foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'] as $hari)<option @selected(request('hari')==$hari)>{{ $hari }}</option>@endforeach</select></div></x-partials.search>
+    <div class="card border-0 shadow-sm"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="table-light"><tr><th>Mata Kuliah</th><th>Dosen</th><th>Hari</th><th>Jam</th><th>Kelas</th><th>Ruangan</th><th width="130">Aksi</th></tr></thead><tbody>
+        @forelse($jadwals as $jadwal)<tr><td>{{ $jadwal->mataKuliah->nama_mk }}</td><td>{{ $jadwal->dosen->nama_dosen }}</td><td>{{ $jadwal->hari }}</td><td>{{ substr($jadwal->jam_mulai,0,5) }} - {{ substr($jadwal->jam_selesai,0,5) }}</td><td>{{ $jadwal->kelas }}</td><td>{{ $jadwal->ruangan }}</td><td>@include('partials.actions', ['show'=>route('admin.jadwal.show',$jadwal), 'edit'=>route('admin.jadwal.edit',$jadwal), 'delete'=>route('admin.jadwal.destroy',$jadwal)])</td></tr>@empty<tr><td colspan="7" class="text-center text-muted">Data kosong.</td></tr>@endforelse
+    </tbody></table></div></div><div class="mt-3">{{ $jadwals->links() }}</div>
+</x-app-layout>

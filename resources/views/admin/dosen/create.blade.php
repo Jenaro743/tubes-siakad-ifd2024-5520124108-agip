@@ -1,0 +1,1 @@
+<x-app-layout><x-slot name="header"><h1 class="h3 mb-0">Tambah Dosen</h1></x-slot><div class="card border-0 shadow-sm"><div class="card-body"><form method="POST" action="{{ route('admin.dosen.store') }}">@include('admin.dosen._form')</form></div></div></x-app-layout>

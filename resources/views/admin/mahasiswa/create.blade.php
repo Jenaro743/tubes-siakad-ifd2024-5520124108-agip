@@ -1,0 +1,1 @@
+<x-app-layout><x-slot name="header"><h1 class="h3 mb-0">Tambah Mahasiswa</h1></x-slot><div class="card border-0 shadow-sm"><div class="card-body"><form method="POST" enctype="multipart/form-data" action="{{ route('admin.mahasiswa.store') }}">@include('admin.mahasiswa._form')</form></div></div></x-app-layout>

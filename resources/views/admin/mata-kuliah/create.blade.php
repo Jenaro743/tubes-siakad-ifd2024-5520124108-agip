@@ -1,0 +1,1 @@
+<x-app-layout><x-slot name="header"><h1 class="h3 mb-0">Tambah Mata Kuliah</h1></x-slot><div class="card border-0 shadow-sm"><div class="card-body"><form method="POST" action="{{ route('admin.mata-kuliah.store') }}">@include('admin.mata-kuliah._form')</form></div></div></x-app-layout>
