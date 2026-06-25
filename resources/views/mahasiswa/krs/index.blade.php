@@ -15,6 +15,7 @@
         <x-partials.search />
         <div class="table-responsive"><table class="table table-hover align-middle"><thead><tr><th>Mata Kuliah</th><th>Dosen</th><th>Hari/Jam</th><th>Kelas</th><th></th></tr></thead><tbody>
             @forelse($jadwals as $jadwal)<tr><td>{{ $jadwal->mataKuliah->kode_mk }} - {{ $jadwal->mataKuliah->nama_mk }} <span class="badge bg-secondary">{{ $jadwal->mataKuliah->sks }} SKS</span></td><td>{{ $jadwal->dosen->nama_dosen }}</td><td>{{ $jadwal->hari }} {{ substr($jadwal->jam_mulai,0,5) }} - {{ substr($jadwal->jam_selesai,0,5) }}</td><td>{{ $jadwal->kelas }}</td><td><form method="POST" action="{{ route('mahasiswa.krs.store') }}">@csrf<input type="hidden" name="jadwal_id" value="{{ $jadwal->id }}"><button class="btn btn-sm btn-primary">Ambil</button></form></td></tr>@empty<tr><td colspan="5" class="text-center text-muted">Tidak ada jadwal tersedia.</td></tr>@endforelse
-        </tbody></table></div>{{ $jadwals->links() }}
+        </tbody></table></div>
+        <div class="mt-3">{{ $jadwals->links() }}</div>
     </div></div>
 </x-app-layout>

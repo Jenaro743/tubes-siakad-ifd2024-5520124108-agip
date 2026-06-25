@@ -43,8 +43,11 @@
                                 <a class="{{ request()->routeIs('admin.mahasiswa.*') ? 'active' : '' }}" href="{{ route('admin.mahasiswa.index') }}"><i class="bi bi-people"></i> Mahasiswa</a>
                                 <a class="{{ request()->routeIs('admin.mata-kuliah.*') ? 'active' : '' }}" href="{{ route('admin.mata-kuliah.index') }}"><i class="bi bi-journal-bookmark"></i> Mata Kuliah</a>
                                 <a class="{{ request()->routeIs('admin.jadwal.*') ? 'active' : '' }}" href="{{ route('admin.jadwal.index') }}"><i class="bi bi-calendar-week"></i> Jadwal</a>
+                            @elseif(auth()->user()->role === 'dosen')
+                                {{-- <a class="{{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a> --}}
+                                <a class="{{ request()->routeIs('dosen.jadwal.*') ? 'active' : '' }}" href="{{ route('dosen.jadwal.index') }}"><i class="bi bi-calendar3"></i> Jadwal Mengajar</a>
                             @else
-                                <a class="{{ request()->routeIs('mahasiswa.krs.*') ? 'active' : '' }}" href="{{ route('mahasiswa.krs.index') }}"><i class="bi bi-card-checklist"></i> KRS</a>
+                                <a class="{{ request()->routeIs('mahasiswa.krs.*') ? 'active' : '' }}" href="{{ route('mahasiswa.krs.index') }}"><i class="bi bi-card-checklist"></i> KRS Diambil <span class="badge bg-white text-dark ms-2">{{ auth()->user()->mahasiswa?->krs()->count() ?? 0 }}</span></a>
                                 <a class="{{ request()->routeIs('mahasiswa.jadwal.*') ? 'active' : '' }}" href="{{ route('mahasiswa.jadwal.index') }}"><i class="bi bi-calendar3"></i> Jadwal</a>
                                 <a class="{{ request()->routeIs('mahasiswa.profile.*') ? 'active' : '' }}" href="{{ route('mahasiswa.profile.edit') }}"><i class="bi bi-person-circle"></i> Profil</a>
                             @endif

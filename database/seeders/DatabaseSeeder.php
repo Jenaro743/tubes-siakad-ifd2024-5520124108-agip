@@ -22,15 +22,24 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Administrator', 'password' => Hash::make('12345678'), 'role' => 'admin', 'email_verified_at' => now()]
         );
 
-        $dosens = collect(range(1, 10))->map(fn ($i) => Dosen::updateOrCreate(
-            ['nidn' => '10203040'.str_pad($i, 2, '0', STR_PAD_LEFT)],
-            [
-                'nama_dosen' => fake()->name(),
-                'email' => 'dosen'.$i.'@siakad.test',
-                'no_telp' => '08123'.str_pad((string) $i, 7, '0', STR_PAD_LEFT),
-                'alamat' => fake()->address(),
-            ]
-        ));
+        $dosens = collect(range(1, 10))->map(function ($i) {
+            $dosen = Dosen::updateOrCreate(
+                ['nidn' => '10203040'.str_pad($i, 2, '0', STR_PAD_LEFT)],
+                [
+                    'nama_dosen' => fake()->name(),
+                    'email' => 'dosen'.$i.'@siakad.test',
+                    'no_telp' => '08123'.str_pad((string) $i, 7, '0', STR_PAD_LEFT),
+                    'alamat' => fake()->address(),
+                ]
+            );
+
+            User::updateOrCreate(
+                ['email' => $dosen->email],
+                ['name' => $dosen->nama_dosen, 'password' => Hash::make('12345678'), 'role' => 'dosen', 'email_verified_at' => now()]
+            );
+
+            return $dosen;
+        });
 
         $jurusan = ['Teknik Informatika', 'Sistem Informasi', 'Manajemen Informatika'];
         collect(range(1, 20))->each(function ($i) use ($jurusan) {

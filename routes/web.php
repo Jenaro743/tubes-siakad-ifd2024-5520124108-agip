@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\JadwalController as AdminJadwalController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\MataKuliahController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dosen\JadwalController as DosenJadwalController;
 use App\Http\Controllers\Mahasiswa\JadwalController;
 use App\Http\Controllers\Mahasiswa\KrsController;
 use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileController;
@@ -34,6 +35,11 @@ Route::middleware(['auth', 'role:mahasiswa'])->prefix('mahasiswa')->name('mahasi
     Route::get('jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
     Route::get('profile', [MahasiswaProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [MahasiswaProfileController::class, 'update'])->name('profile.update');
+});
+
+Route::middleware(['auth', 'role:dosen'])->prefix('dosen')->name('dosen.')->group(function () {
+    Route::get('jadwal', [DosenJadwalController::class, 'index'])->name('jadwal.index');
+    Route::get('jadwal/{jadwal}', [DosenJadwalController::class, 'show'])->name('jadwal.show');
 });
 
 Route::middleware('auth')->group(function () {

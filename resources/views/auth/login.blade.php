@@ -27,6 +27,10 @@
             @endif
             <button class="btn btn-primary px-4" type="submit">Login</button>
         </div>
-        <div class="alert alert-info mt-4 mb-0 small">Admin: admin@gmail.com / password</div>
+        <div class="alert alert-info mt-4 mb-0 small">
+            <div><strong>Admin:</strong> admin@gmail.com / 12345678</div>
+            <div><strong>Mahasiswa:</strong> mahasiswa1@siakad.test / 12345678</div>
+            <div><strong>Dosen:</strong> dosen1@siakad.test / 12345678</div>
+        </div>
     </form>
 </x-guest-layout>

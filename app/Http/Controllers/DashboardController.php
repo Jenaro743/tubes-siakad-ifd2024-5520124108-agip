@@ -28,6 +28,18 @@ class DashboardController extends Controller
             ]);
         }
 
+        if ($request->user()->role === 'dosen') {
+            $dosen = Dosen::where('email', $request->user()->email)->first();
+            abort_unless($dosen, 403, 'Profil dosen belum dibuat admin.');
+
+            $jadwals = $dosen->jadwals()->with('mataKuliah')->get();
+
+            return view('dosen.dashboard', [
+                'dosen' => $dosen,
+                'jadwals' => $jadwals,
+            ]);
+        }
+
         $mahasiswa = $request->user()->mahasiswa;
         abort_unless($mahasiswa, 403, 'Profil mahasiswa belum dibuat admin.');
 
